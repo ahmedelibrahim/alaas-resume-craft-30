@@ -20,10 +20,11 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
   return (
     <Card className="shadow-lg print:shadow-none print:border-none overflow-hidden max-w-4xl mx-auto avoid-break">
       <CardContent className="p-0">
-        <div className={`grid grid-cols-1 lg:grid-cols-10 min-h-[297mm] print:min-h-0 ${isRTL ? 'lg:grid-cols-[3fr_7fr]' : 'lg:grid-cols-[3fr_7fr]'}`}>
-          {/* Sidebar - 30% */}
-          <div className={`${theme.headerBg} text-white p-6 print:p-4 space-y-6 print:space-y-4 ${isRTL ? 'lg:order-2' : 'lg:order-1'} lg:col-span-3 avoid-break`}>
-            {/* Profile Photo */}
+        <div className="flex min-h-[297mm] print:min-h-[297mm]">
+          {/* الشريط الجانبي الأيمن - 30% */}
+          <div className={`${theme.headerBg} text-white p-6 print:p-4 space-y-6 print:space-y-4 avoid-break`} 
+               style={{ width: '30%', minWidth: '30%' }}>
+            {/* الصورة الشخصية */}
             <div className="text-center avoid-break">
               <Avatar className="w-32 h-32 mx-auto border-4 border-white shadow-lg mb-4 print:w-24 print:h-24 print:mb-3">
                 <AvatarImage 
@@ -36,7 +37,7 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
                 </AvatarFallback>
               </Avatar>
               
-              {/* Name and Title moved below photo */}
+              {/* الاسم والمسمى الوظيفي تحت الصورة */}
               <div className="text-center mb-6 print:mb-4">
                 <h1 className="text-2xl font-bold mb-2 print:text-xl print:mb-1">
                   {data.name}
@@ -47,7 +48,7 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
               </div>
             </div>
 
-            {/* Contact Information */}
+            {/* معلومات التواصل */}
             <div className="space-y-3 print:space-y-2 avoid-break">
               <h3 className="text-lg font-bold mb-3 print:text-base print:mb-2 flex items-center gap-2">
                 <User className="w-5 h-5 print:w-4 print:h-4" />
@@ -73,7 +74,7 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
               </div>
             </div>
 
-            {/* Skills */}
+            {/* المهارات */}
             <div className="space-y-4 print:space-y-3 avoid-break">
               <SkillsSection 
                 skills={data.skills}
@@ -83,7 +84,7 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
               />
             </div>
 
-            {/* Languages */}
+            {/* اللغات */}
             <div className="space-y-4 print:space-y-3 avoid-break">
               <LanguagesSection 
                 languages={data.languages}
@@ -93,7 +94,7 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
               />
             </div>
 
-            {/* Personal Info */}
+            {/* المعلومات الشخصية */}
             <div className="space-y-3 print:space-y-2 avoid-break">
               <h3 className="text-lg font-bold mb-3 print:text-base print:mb-2">
                 {data.sections.personalInfo}
@@ -106,9 +107,10 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
             </div>
           </div>
 
-          {/* Main Content - 70% */}
-          <div className={`bg-white p-6 print:p-4 space-y-6 print:space-y-4 ${isRTL ? 'lg:order-1' : 'lg:order-2'} lg:col-span-7`}>
-            {/* Summary */}
+          {/* المحتوى الرئيسي الأيسر - 70% */}
+          <div className="bg-white p-6 print:p-4 space-y-6 print:space-y-4" 
+               style={{ width: '70%', minWidth: '70%' }}>
+            {/* النبذة الشخصية */}
             <div className="space-y-4 print:space-y-3 avoid-break">
               <SummarySection 
                 summary={data.summary}
@@ -117,7 +119,7 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
               />
             </div>
 
-            {/* Experience */}
+            {/* الخبرات العملية */}
             <div className="space-y-4 print:space-y-3 avoid-break section-break">
               <div className="flex items-center gap-2 mb-4 print:mb-3">
                 <div className={`w-8 h-8 print:w-6 print:h-6 ${theme.primary} rounded-full flex items-center justify-center`}>
@@ -145,7 +147,7 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
               </div>
             </div>
 
-            {/* Education */}
+            {/* المؤهلات الدراسية */}
             <div className="space-y-4 print:space-y-3 avoid-break">
               <div className="flex items-center gap-2 mb-4 print:mb-3">
                 <div className={`w-8 h-8 print:w-6 print:h-6 ${theme.primary} rounded-full flex items-center justify-center`}>
