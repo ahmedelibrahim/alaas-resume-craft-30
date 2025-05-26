@@ -20,9 +20,9 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
   return (
     <Card className="shadow-lg print:shadow-none print:border-none overflow-hidden max-w-4xl mx-auto avoid-break">
       <CardContent className="p-0">
-        <div className={`grid grid-cols-1 lg:grid-cols-3 min-h-[297mm] print:min-h-0 ${isRTL ? 'lg:grid-cols-[2fr_1fr]' : 'lg:grid-cols-[1fr_2fr]'}`}>
-          {/* Sidebar */}
-          <div className={`${theme.headerBg} text-white p-6 print:p-4 space-y-6 print:space-y-4 ${isRTL ? 'lg:order-2' : 'lg:order-1'} avoid-break`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-10 min-h-[297mm] print:min-h-0 ${isRTL ? 'lg:grid-cols-[3fr_7fr]' : 'lg:grid-cols-[3fr_7fr]'}`}>
+          {/* Sidebar - 30% */}
+          <div className={`${theme.headerBg} text-white p-6 print:p-4 space-y-6 print:space-y-4 ${isRTL ? 'lg:order-2' : 'lg:order-1'} lg:col-span-3 avoid-break`}>
             {/* Profile Photo */}
             <div className="text-center avoid-break">
               <Avatar className="w-32 h-32 mx-auto border-4 border-white shadow-lg mb-4 print:w-24 print:h-24 print:mb-3">
@@ -35,6 +35,16 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
                   {data.name.split(' ').map(n => n[0]).join('')}
                 </AvatarFallback>
               </Avatar>
+              
+              {/* Name and Title moved below photo */}
+              <div className="text-center mb-6 print:mb-4">
+                <h1 className="text-2xl font-bold mb-2 print:text-xl print:mb-1">
+                  {data.name}
+                </h1>
+                <p className="text-lg font-medium opacity-90 print:text-base">
+                  {data.title}
+                </p>
+              </div>
             </div>
 
             {/* Contact Information */}
@@ -96,18 +106,8 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
             </div>
           </div>
 
-          {/* Main Content */}
-          <div className={`bg-white p-6 print:p-4 space-y-6 print:space-y-4 ${isRTL ? 'lg:order-1' : 'lg:order-2'} lg:col-span-2`}>
-            {/* Header */}
-            <div className="border-b-2 border-gray-200 pb-4 print:pb-3 avoid-break">
-              <h1 className="text-3xl font-bold text-gray-800 mb-2 print:text-2xl print:mb-1">
-                {data.name}
-              </h1>
-              <p className="text-lg text-gray-600 font-medium print:text-base">
-                {data.title}
-              </p>
-            </div>
-
+          {/* Main Content - 70% */}
+          <div className={`bg-white p-6 print:p-4 space-y-6 print:space-y-4 ${isRTL ? 'lg:order-1' : 'lg:order-2'} lg:col-span-7`}>
             {/* Summary */}
             <div className="space-y-4 print:space-y-3 avoid-break">
               <SummarySection 
