@@ -47,5 +47,12 @@ export interface Theme {
   skillColor: string;
 }
 
+export interface Layout {
+  name: { ar: string; en: string };
+  id: string;
+  description: { ar: string; en: string };
+}
+
 export type Language = 'ar' | 'en';
 export type ThemeType = 'modern' | 'classic' | 'creative' | 'minimal' | 'corporate';
+export type LayoutType = 'traditional' | 'sidebar' | 'timeline' | 'cards' | 'executive';

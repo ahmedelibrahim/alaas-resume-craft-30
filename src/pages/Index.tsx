@@ -1,20 +1,20 @@
 
 import React, { useState } from 'react';
-import { Card, CardContent } from "@/components/ui/card";
 import { themes, cvData } from '@/data/cvData';
-import { Language, ThemeType } from '@/types/cv';
+import { Language, ThemeType, LayoutType } from '@/types/cv';
 import CVControls from '@/components/CVControls';
 import ThemeSelector from '@/components/ThemeSelector';
-import CVHeader from '@/components/CVHeader';
-import ExperienceSection from '@/components/ExperienceSection';
-import EducationSection from '@/components/EducationSection';
-import SkillsSection from '@/components/SkillsSection';
-import LanguagesSection from '@/components/LanguagesSection';
-import PersonalInfoSection from '@/components/PersonalInfoSection';
+import LayoutSelector from '@/components/LayoutSelector';
+import TraditionalLayout from '@/components/layouts/TraditionalLayout';
+import SidebarLayout from '@/components/layouts/SidebarLayout';
+import TimelineLayout from '@/components/layouts/TimelineLayout';
+import CardsLayout from '@/components/layouts/CardsLayout';
+import ExecutiveLayout from '@/components/layouts/ExecutiveLayout';
 
 const Index = () => {
   const [language, setLanguage] = useState<Language>('ar');
   const [theme, setTheme] = useState<ThemeType>('modern');
+  const [layout, setLayout] = useState<LayoutType>('traditional');
 
   const handlePrint = () => {
     window.print();
@@ -27,6 +27,27 @@ const Index = () => {
   const currentTheme = themes[theme];
   const currentData = cvData[language];
   const isRTL = language === 'ar';
+
+  const renderLayout = () => {
+    const layoutProps = {
+      data: currentData,
+      theme: currentTheme,
+      language
+    };
+
+    switch (layout) {
+      case 'sidebar':
+        return <SidebarLayout {...layoutProps} />;
+      case 'timeline':
+        return <TimelineLayout {...layoutProps} />;
+      case 'cards':
+        return <CardsLayout {...layoutProps} />;
+      case 'executive':
+        return <ExecutiveLayout {...layoutProps} />;
+      default:
+        return <TraditionalLayout {...layoutProps} />;
+    }
+  };
 
   return (
     <div className={`min-h-screen bg-gray-50 ${isRTL ? 'rtl' : 'ltr'}`}>
@@ -44,53 +65,16 @@ const Index = () => {
         onThemeChange={setTheme}
       />
 
+      {/* Layout selector */}
+      <LayoutSelector 
+        language={language}
+        layout={layout}
+        onLayoutChange={setLayout}
+      />
+
       {/* CV Content */}
       <div className="max-w-4xl mx-auto p-6 print:p-0 print:max-w-none">
-        <Card className="shadow-lg print:shadow-none print:border-none overflow-hidden">
-          {/* Header */}
-          <CVHeader data={currentData} theme={currentTheme} />
-
-          <CardContent className="p-8 print:p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Left Column */}
-              <div className="lg:col-span-2 space-y-6">
-                <ExperienceSection 
-                  experience={currentData.experience}
-                  title={currentData.sections.experience}
-                  theme={currentTheme}
-                />
-
-                <EducationSection 
-                  education={currentData.education}
-                  title={currentData.sections.education}
-                  theme={currentTheme}
-                />
-              </div>
-
-              {/* Right Column */}
-              <div className="space-y-6">
-                <PersonalInfoSection 
-                  personalInfo={currentData.personalInfo}
-                  title={currentData.sections.personalInfo}
-                  theme={currentTheme}
-                  language={language}
-                />
-
-                <SkillsSection 
-                  skills={currentData.skills}
-                  title={currentData.sections.skills}
-                  theme={currentTheme}
-                />
-
-                <LanguagesSection 
-                  languages={currentData.languages}
-                  title={currentData.sections.languages}
-                  theme={currentTheme}
-                />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        {renderLayout()}
       </div>
 
       {/* Print Styles */}

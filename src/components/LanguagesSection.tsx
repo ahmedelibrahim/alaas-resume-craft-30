@@ -7,16 +7,19 @@ interface LanguagesSectionProps {
   languages: CVLanguage[];
   title: string;
   theme: Theme;
+  variant?: 'default' | 'sidebar';
 }
 
-const LanguagesSection: React.FC<LanguagesSectionProps> = ({ languages, title, theme }) => {
+const LanguagesSection: React.FC<LanguagesSectionProps> = ({ languages, title, theme, variant = 'default' }) => {
+  const isLight = variant === 'sidebar';
+  
   return (
     <section>
       <div className="flex items-center gap-2 mb-4">
-        <div className={`w-8 h-8 ${theme.primary} rounded-full flex items-center justify-center`}>
-          <Languages className="w-4 h-4 text-white" />
+        <div className={`w-8 h-8 ${isLight ? 'bg-white/20' : theme.primary} rounded-full flex items-center justify-center`}>
+          <Languages className={`w-4 h-4 ${isLight ? 'text-white' : 'text-white'}`} />
         </div>
-        <h2 className={`text-lg font-bold ${theme.accent}`}>
+        <h2 className={`text-lg font-bold ${isLight ? 'text-white' : theme.accent}`}>
           {title}
         </h2>
       </div>
@@ -24,13 +27,15 @@ const LanguagesSection: React.FC<LanguagesSectionProps> = ({ languages, title, t
         {languages.map((lang, index) => (
           <div key={index}>
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-700">{lang.name}</span>
+              <span className={`text-sm font-medium ${isLight ? 'text-white' : 'text-gray-700'}`}>{lang.name}</span>
               <div className="flex gap-1">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <div
                     key={i}
                     className={`w-3 h-3 rounded-full transition-colors ${
-                      i < (lang.level / 20) ? theme.skillColor : 'bg-gray-300'
+                      i < (lang.level / 20) 
+                        ? (isLight ? 'bg-white' : theme.skillColor)
+                        : (isLight ? 'bg-white/30' : 'bg-gray-300')
                     }`}
                   />
                 ))}
