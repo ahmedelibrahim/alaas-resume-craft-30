@@ -1,0 +1,172 @@
+
+import React from 'react';
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Mail, Phone, MapPin, Calendar, User, Briefcase, GraduationCap } from "lucide-react";
+import { CVData, Theme, Language } from '@/types/cv';
+import SkillsSection from '@/components/SkillsSection';
+import LanguagesSection from '@/components/LanguagesSection';
+
+interface ProfessionalLayoutProps {
+  data: CVData;
+  theme: Theme;
+  language: Language;
+}
+
+const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, language }) => {
+  const isRTL = language === 'ar';
+  
+  return (
+    <Card className="shadow-lg print:shadow-none print:border-none overflow-hidden max-w-4xl mx-auto">
+      <CardContent className="p-0">
+        <div className={`grid grid-cols-1 lg:grid-cols-3 min-h-[297mm] ${isRTL ? 'lg:grid-cols-[2fr_1fr]' : 'lg:grid-cols-[1fr_2fr]'}`}>
+          {/* Sidebar */}
+          <div className={`${theme.headerBg} text-white p-6 space-y-6 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`}>
+            {/* Profile Photo */}
+            <div className="text-center">
+              <Avatar className="w-32 h-32 mx-auto border-4 border-white shadow-lg mb-4">
+                <AvatarImage 
+                  src="/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png" 
+                  alt={data.name}
+                  className="object-cover"
+                />
+                <AvatarFallback className="text-2xl font-bold bg-white text-gray-600">
+                  {data.name.split(' ').map(n => n[0]).join('')}
+                </AvatarFallback>
+              </Avatar>
+            </div>
+
+            {/* Contact Information */}
+            <div className="space-y-3">
+              <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                <User className="w-5 h-5" />
+                {language === 'ar' ? 'معلومات التواصل' : 'Contact Info'}
+              </h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 flex-shrink-0" />
+                  <span className="break-all">{data.personalInfo.phone}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 flex-shrink-0" />
+                  <span className="break-all">{data.personalInfo.email}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 flex-shrink-0" />
+                  <span>{data.personalInfo.residence}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 flex-shrink-0" />
+                  <span>{data.personalInfo.birthDate}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Skills */}
+            <div className="space-y-4">
+              <SkillsSection 
+                skills={data.skills}
+                title={data.sections.skills}
+                theme={theme}
+                variant="sidebar"
+              />
+            </div>
+
+            {/* Languages */}
+            <div className="space-y-4">
+              <LanguagesSection 
+                languages={data.languages}
+                title={data.sections.languages}
+                theme={theme}
+                variant="sidebar"
+              />
+            </div>
+
+            {/* Personal Info */}
+            <div className="space-y-3">
+              <h3 className="text-lg font-bold mb-3">
+                {data.sections.personalInfo}
+              </h3>
+              <div className="space-y-2 text-sm">
+                <p><strong>{language === 'ar' ? 'مكان الولادة:' : 'Birth Place:'}</strong> {data.personalInfo.birthPlace}</p>
+                <p><strong>{language === 'ar' ? 'الجنسية:' : 'Nationality:'}</strong> {data.personalInfo.nationality}</p>
+                <p><strong>{language === 'ar' ? 'الحالة الاجتماعية:' : 'Marital Status:'}</strong> {data.personalInfo.maritalStatus}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className={`bg-white p-6 space-y-6 ${isRTL ? 'lg:order-1' : 'lg:order-2'} lg:col-span-2`}>
+            {/* Header */}
+            <div className="border-b-2 border-gray-200 pb-4">
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">
+                {data.name}
+              </h1>
+              <p className="text-lg text-gray-600 font-medium">
+                {data.title}
+              </p>
+            </div>
+
+            {/* Experience */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 mb-4">
+                <div className={`w-8 h-8 ${theme.primary} rounded-full flex items-center justify-center`}>
+                  <Briefcase className="w-4 h-4 text-white" />
+                </div>
+                <h2 className={`text-xl font-bold ${theme.accent}`}>
+                  {data.sections.experience}
+                </h2>
+              </div>
+              <div className="space-y-4">
+                {data.experience.map((exp, index) => (
+                  <div key={index} className="border-l-3 border-gray-200 pl-4 pb-3">
+                    <div className="flex justify-between items-start mb-1">
+                      <h3 className="font-bold text-gray-800">{exp.title}</h3>
+                      <span className="text-sm text-gray-500 ml-4 flex-shrink-0 font-medium">
+                        {exp.period}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-sm">
+                      {exp.organization}
+                      {exp.location && ` - ${exp.location}`}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Education */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 mb-4">
+                <div className={`w-8 h-8 ${theme.primary} rounded-full flex items-center justify-center`}>
+                  <GraduationCap className="w-4 h-4 text-white" />
+                </div>
+                <h2 className={`text-xl font-bold ${theme.accent}`}>
+                  {data.sections.education}
+                </h2>
+              </div>
+              <div className="space-y-4">
+                {data.education.map((edu, index) => (
+                  <div key={index} className="border-l-3 border-gray-200 pl-4 pb-3">
+                    <div className="flex justify-between items-start mb-1">
+                      <h3 className="font-bold text-gray-800">{edu.title}</h3>
+                      <span className="text-sm text-gray-500 ml-4 flex-shrink-0 font-medium">
+                        {edu.year}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-sm">
+                      {edu.institution}
+                      {edu.location && ` - ${edu.location}`}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default ProfessionalLayout;

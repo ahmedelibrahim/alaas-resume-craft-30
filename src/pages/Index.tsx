@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { themes, cvData } from '@/data/cvData';
 import { Language, ThemeType, LayoutType } from '@/types/cv';
@@ -10,6 +9,7 @@ import SidebarLayout from '@/components/layouts/SidebarLayout';
 import TimelineLayout from '@/components/layouts/TimelineLayout';
 import CardsLayout from '@/components/layouts/CardsLayout';
 import ExecutiveLayout from '@/components/layouts/ExecutiveLayout';
+import ProfessionalLayout from '@/components/layouts/ProfessionalLayout';
 
 const Index = () => {
   const [language, setLanguage] = useState<Language>('ar');
@@ -44,6 +44,8 @@ const Index = () => {
         return <CardsLayout {...layoutProps} />;
       case 'executive':
         return <ExecutiveLayout {...layoutProps} />;
+      case 'professional':
+        return <ProfessionalLayout {...layoutProps} />;
       default:
         return <TraditionalLayout {...layoutProps} />;
     }

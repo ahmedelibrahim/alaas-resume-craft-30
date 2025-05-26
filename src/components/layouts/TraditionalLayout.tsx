@@ -19,9 +19,9 @@ const TraditionalLayout: React.FC<TraditionalLayoutProps> = ({ data, theme, lang
   return (
     <Card className="shadow-lg print:shadow-none print:border-none overflow-hidden">
       <CVHeader data={data} theme={theme} />
-      <CardContent className="p-8 print:p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
+      <CardContent className="p-6 print:p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-5">
             <ExperienceSection 
               experience={data.experience}
               title={data.sections.experience}
@@ -33,7 +33,7 @@ const TraditionalLayout: React.FC<TraditionalLayoutProps> = ({ data, theme, lang
               theme={theme}
             />
           </div>
-          <div className="space-y-6">
+          <div className="space-y-5">
             <PersonalInfoSection 
               personalInfo={data.personalInfo}
               title={data.sections.personalInfo}

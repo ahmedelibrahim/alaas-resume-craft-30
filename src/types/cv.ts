@@ -19,6 +19,20 @@ export interface CVLanguage {
   level: number;
 }
 
+export interface JobExperience {
+  title: string;
+  organization: string;
+  location: string;
+  period: string;
+}
+
+export interface Education {
+  title: string;
+  institution: string;
+  location: string;
+  year: string;
+}
+
 export interface CVSections {
   personalInfo: string;
   education: string;
@@ -31,8 +45,8 @@ export interface CVData {
   name: string;
   title: string;
   personalInfo: CVPersonalInfo;
-  education: string[];
-  experience: string[];
+  education: Education[];
+  experience: JobExperience[];
   skills: CVSkill[];
   languages: CVLanguage[];
   sections: CVSections;
@@ -55,4 +69,4 @@ export interface Layout {
 
 export type Language = 'ar' | 'en';
 export type ThemeType = 'modern' | 'classic' | 'creative' | 'minimal' | 'corporate';
-export type LayoutType = 'traditional' | 'sidebar' | 'timeline' | 'cards' | 'executive';
+export type LayoutType = 'traditional' | 'sidebar' | 'timeline' | 'cards' | 'executive' | 'professional';

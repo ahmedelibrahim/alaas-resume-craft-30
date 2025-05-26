@@ -26,5 +26,10 @@ export const layouts: Record<LayoutType, Layout> = {
     name: { ar: 'تنفيذي', en: 'Executive' },
     id: 'executive',
     description: { ar: 'تصميم راقي للمناصب التنفيذية', en: 'Premium design for executive positions' }
+  },
+  professional: {
+    name: { ar: 'احترافي', en: 'Professional' },
+    id: 'professional',
+    description: { ar: 'تصميم احترافي مقسم لصفحة واحدة مع شريط جانبي ملون', en: 'Professional one-page design with colored sidebar' }
   }
 };
