@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +98,345 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* أنماط مخصصة للطباعة - Print Styles */
+@media print {
+  /* إعدادات أساسية للصفحة */
+  @page {
+    margin: 0.5in;
+    size: A4;
+  }
+
+  /* الحفاظ على الألوان والخلفيات */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* إخفاء العناصر غير المرغوب فيها في الطباعة */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* إعدادات النصوص */
+  body {
+    font-size: 11pt;
+    line-height: 1.4;
+    color: #000 !important;
+  }
+
+  /* إعدادات البطاقات والحاويات */
+  .shadow-lg,
+  .shadow-md {
+    box-shadow: none !important;
+    border: 1px solid #e5e5e5 !important;
+  }
+
+  /* الحفاظ على تخطيط الأعمدة */
+  .grid {
+    display: grid !important;
+  }
+
+  .grid-cols-1 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: 1fr 1fr 1fr 1fr !important;
+  }
+
+  .lg\:col-span-2 {
+    grid-column: span 2 / span 2 !important;
+  }
+
+  .lg\:col-span-3 {
+    grid-column: span 3 / span 3 !important;
+  }
+
+  /* إعدادات المسافات */
+  .space-y-3 > * + * {
+    margin-top: 12pt !important;
+  }
+
+  .space-y-4 > * + * {
+    margin-top: 16pt !important;
+  }
+
+  .space-y-5 > * + * {
+    margin-top: 20pt !important;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 24pt !important;
+  }
+
+  .gap-6 {
+    gap: 24pt !important;
+  }
+
+  .gap-4 {
+    gap: 16pt !important;
+  }
+
+  /* إعدادات الخطوط والعناوين */
+  h1 {
+    font-size: 18pt !important;
+    font-weight: bold !important;
+    margin-bottom: 8pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+    font-weight: bold !important;
+    margin-bottom: 6pt !important;
+  }
+
+  h3 {
+    font-size: 12pt !important;
+    font-weight: bold !important;
+    margin-bottom: 4pt !important;
+  }
+
+  /* إعدادات الصورة الشخصية */
+  .avatar,
+  [role="img"] {
+    border: 2pt solid #ccc !important;
+    border-radius: 50% !important;
+  }
+
+  /* الحفاظ على الخلفيات الملونة */
+  .bg-blue-600,
+  .bg-blue-500 {
+    background-color: #2563eb !important;
+    color: white !important;
+  }
+
+  .bg-green-600,
+  .bg-green-500 {
+    background-color: #16a34a !important;
+    color: white !important;
+  }
+
+  .bg-purple-600,
+  .bg-purple-500 {
+    background-color: #9333ea !important;
+    color: white !important;
+  }
+
+  .bg-orange-600,
+  .bg-orange-500 {
+    background-color: #ea580c !important;
+    color: white !important;
+  }
+
+  .bg-red-600,
+  .bg-red-500 {
+    background-color: #dc2626 !important;
+    color: white !important;
+  }
+
+  .bg-gray-50 {
+    background-color: #f9fafb !important;
+  }
+
+  .bg-gray-100 {
+    background-color: #f3f4f6 !important;
+  }
+
+  .bg-gray-200 {
+    background-color: #e5e7eb !important;
+  }
+
+  /* أشرطة التقدم */
+  .progress-bar {
+    background-color: #e5e7eb !important;
+    border-radius: 4pt !important;
+    height: 6pt !important;
+  }
+
+  .progress-fill {
+    border-radius: 4pt !important;
+    height: 6pt !important;
+  }
+
+  /* الحدود */
+  .border-l-2 {
+    border-left: 2pt solid #e5e7eb !important;
+  }
+
+  .border-l-3 {
+    border-left: 3pt solid #e5e7eb !important;
+  }
+
+  .border-b-4 {
+    border-bottom: 4pt solid #e5e7eb !important;
+  }
+
+  /* النصوص الملونة */
+  .text-gray-600 {
+    color: #4b5563 !important;
+  }
+
+  .text-gray-700 {
+    color: #374151 !important;
+  }
+
+  .text-gray-800 {
+    color: #1f2937 !important;
+  }
+
+  .text-gray-500 {
+    color: #6b7280 !important;
+  }
+
+  .text-white {
+    color: white !important;
+  }
+
+  /* تحسين التخطيط للقوالب المختلفة */
+  
+  /* قالب الشريط الجانبي */
+  .sidebar-layout {
+    display: grid !important;
+    grid-template-columns: 200pt 1fr !important;
+  }
+
+  /* قالب البطاقات */
+  .cards-layout .card {
+    break-inside: avoid !important;
+    margin-bottom: 12pt !important;
+  }
+
+  /* قالب الجدول الزمني */
+  .timeline-dot {
+    width: 8pt !important;
+    height: 8pt !important;
+    border-radius: 50% !important;
+  }
+
+  .timeline-line {
+    width: 1pt !important;
+    background-color: #d1d5db !important;
+  }
+
+  /* منع كسر الصفحة داخل العناصر المهمة */
+  .experience-item,
+  .education-item,
+  .skill-item {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* تحسين المسافات العمودية */
+  .section {
+    margin-bottom: 16pt !important;
+  }
+
+  /* إعدادات خاصة للخطوط العربية */
+  [dir="rtl"] {
+    text-align: right !important;
+  }
+
+  [dir="rtl"] .flex {
+    flex-direction: row-reverse !important;
+  }
+
+  /* تحسين عرض الأيقونات */
+  svg {
+    width: 12pt !important;
+    height: 12pt !important;
+  }
+
+  /* إخفاء العناصر التفاعلية */
+  button:not(.print-button),
+  .tooltip,
+  .popover {
+    display: none !important;
+  }
+
+  /* تحسين نسبة العرض إلى الارتفاع للصورة */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* منع النص من الانكسار في الأماكن غير المناسبة */
+  .no-break {
+    white-space: nowrap !important;
+  }
+
+  /* تحسين عرض معلومات الاتصال */
+  .contact-info {
+    font-size: 10pt !important;
+  }
+
+  /* ضمان وضوح النصوص الصغيرة */
+  .text-xs {
+    font-size: 9pt !important;
+  }
+
+  .text-sm {
+    font-size: 10pt !important;
+  }
+
+  .text-base {
+    font-size: 11pt !important;
+  }
+
+  .text-lg {
+    font-size: 12pt !important;
+  }
+
+  .text-xl {
+    font-size: 14pt !important;
+  }
+
+  .text-2xl {
+    font-size: 16pt !important;
+  }
+
+  .text-3xl {
+    font-size: 18pt !important;
+  }
+
+  .text-4xl {
+    font-size: 20pt !important;
+  }
+}
+
+/* تحسينات إضافية للطباعة */
+@media print {
+  /* منع العناصر من الانقسام عبر الصفحات */
+  .avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* تحسين المسافات بين الأقسام */
+  .section-break {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* ضمان ظهور الحدود بوضوح */
+  .border {
+    border: 1pt solid #e5e7eb !important;
+  }
+
+  /* تحسين عرض الجداول إن وجدت */
+  table {
+    border-collapse: collapse !important;
+  }
+
+  th, td {
+    border: 1pt solid #e5e7eb !important;
+    padding: 4pt !important;
   }
 }

@@ -17,53 +17,53 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
   const isRTL = language === 'ar';
   
   return (
-    <Card className="shadow-lg print:shadow-none print:border-none overflow-hidden max-w-4xl mx-auto">
+    <Card className="shadow-lg print:shadow-none print:border-none overflow-hidden max-w-4xl mx-auto avoid-break">
       <CardContent className="p-0">
-        <div className={`grid grid-cols-1 lg:grid-cols-3 min-h-[297mm] ${isRTL ? 'lg:grid-cols-[2fr_1fr]' : 'lg:grid-cols-[1fr_2fr]'}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-3 min-h-[297mm] print:min-h-0 ${isRTL ? 'lg:grid-cols-[2fr_1fr]' : 'lg:grid-cols-[1fr_2fr]'}`}>
           {/* Sidebar */}
-          <div className={`${theme.headerBg} text-white p-6 space-y-6 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`}>
+          <div className={`${theme.headerBg} text-white p-6 print:p-4 space-y-6 print:space-y-4 ${isRTL ? 'lg:order-2' : 'lg:order-1'} avoid-break`}>
             {/* Profile Photo */}
-            <div className="text-center">
-              <Avatar className="w-32 h-32 mx-auto border-4 border-white shadow-lg mb-4">
+            <div className="text-center avoid-break">
+              <Avatar className="w-32 h-32 mx-auto border-4 border-white shadow-lg mb-4 print:w-24 print:h-24 print:mb-3">
                 <AvatarImage 
                   src="/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png" 
                   alt={data.name}
                   className="object-cover"
                 />
-                <AvatarFallback className="text-2xl font-bold bg-white text-gray-600">
+                <AvatarFallback className="text-2xl font-bold bg-white text-gray-600 print:text-lg">
                   {data.name.split(' ').map(n => n[0]).join('')}
                 </AvatarFallback>
               </Avatar>
             </div>
 
             {/* Contact Information */}
-            <div className="space-y-3">
-              <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
-                <User className="w-5 h-5" />
+            <div className="space-y-3 print:space-y-2 avoid-break">
+              <h3 className="text-lg font-bold mb-3 print:text-base print:mb-2 flex items-center gap-2">
+                <User className="w-5 h-5 print:w-4 print:h-4" />
                 {language === 'ar' ? 'معلومات التواصل' : 'Contact Info'}
               </h3>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-sm print:text-xs print:space-y-1">
                 <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 flex-shrink-0" />
+                  <Phone className="w-4 h-4 flex-shrink-0 print:w-3 print:h-3" />
                   <span className="break-all">{data.personalInfo.phone}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 flex-shrink-0" />
+                  <Mail className="w-4 h-4 flex-shrink-0 print:w-3 print:h-3" />
                   <span className="break-all">{data.personalInfo.email}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 flex-shrink-0" />
+                  <MapPin className="w-4 h-4 flex-shrink-0 print:w-3 print:h-3" />
                   <span>{data.personalInfo.residence}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 flex-shrink-0" />
+                  <Calendar className="w-4 h-4 flex-shrink-0 print:w-3 print:h-3" />
                   <span>{data.personalInfo.birthDate}</span>
                 </div>
               </div>
             </div>
 
             {/* Skills */}
-            <div className="space-y-4">
+            <div className="space-y-4 print:space-y-3 avoid-break">
               <SkillsSection 
                 skills={data.skills}
                 title={data.sections.skills}
@@ -73,7 +73,7 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
             </div>
 
             {/* Languages */}
-            <div className="space-y-4">
+            <div className="space-y-4 print:space-y-3 avoid-break">
               <LanguagesSection 
                 languages={data.languages}
                 title={data.sections.languages}
@@ -83,11 +83,11 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
             </div>
 
             {/* Personal Info */}
-            <div className="space-y-3">
-              <h3 className="text-lg font-bold mb-3">
+            <div className="space-y-3 print:space-y-2 avoid-break">
+              <h3 className="text-lg font-bold mb-3 print:text-base print:mb-2">
                 {data.sections.personalInfo}
               </h3>
-              <div className="space-y-2 text-sm">
+              <div className="space-y-2 text-sm print:text-xs print:space-y-1">
                 <p><strong>{language === 'ar' ? 'مكان الولادة:' : 'Birth Place:'}</strong> {data.personalInfo.birthPlace}</p>
                 <p><strong>{language === 'ar' ? 'الجنسية:' : 'Nationality:'}</strong> {data.personalInfo.nationality}</p>
                 <p><strong>{language === 'ar' ? 'الحالة الاجتماعية:' : 'Marital Status:'}</strong> {data.personalInfo.maritalStatus}</p>
@@ -96,37 +96,37 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
           </div>
 
           {/* Main Content */}
-          <div className={`bg-white p-6 space-y-6 ${isRTL ? 'lg:order-1' : 'lg:order-2'} lg:col-span-2`}>
+          <div className={`bg-white p-6 print:p-4 space-y-6 print:space-y-4 ${isRTL ? 'lg:order-1' : 'lg:order-2'} lg:col-span-2`}>
             {/* Header */}
-            <div className="border-b-2 border-gray-200 pb-4">
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            <div className="border-b-2 border-gray-200 pb-4 print:pb-3 avoid-break">
+              <h1 className="text-3xl font-bold text-gray-800 mb-2 print:text-2xl print:mb-1">
                 {data.name}
               </h1>
-              <p className="text-lg text-gray-600 font-medium">
+              <p className="text-lg text-gray-600 font-medium print:text-base">
                 {data.title}
               </p>
             </div>
 
             {/* Experience */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 mb-4">
-                <div className={`w-8 h-8 ${theme.primary} rounded-full flex items-center justify-center`}>
-                  <Briefcase className="w-4 h-4 text-white" />
+            <div className="space-y-4 print:space-y-3 avoid-break section-break">
+              <div className="flex items-center gap-2 mb-4 print:mb-3">
+                <div className={`w-8 h-8 print:w-6 print:h-6 ${theme.primary} rounded-full flex items-center justify-center`}>
+                  <Briefcase className="w-4 h-4 text-white print:w-3 print:h-3" />
                 </div>
-                <h2 className={`text-xl font-bold ${theme.accent}`}>
+                <h2 className={`text-xl font-bold print:text-lg ${theme.accent}`}>
                   {data.sections.experience}
                 </h2>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4 print:space-y-3">
                 {data.experience.map((exp, index) => (
-                  <div key={index} className="border-l-3 border-gray-200 pl-4 pb-3">
+                  <div key={index} className="border-l-3 border-gray-200 pl-4 pb-3 print:pl-3 print:pb-2 experience-item">
                     <div className="flex justify-between items-start mb-1">
-                      <h3 className="font-bold text-gray-800">{exp.title}</h3>
-                      <span className="text-sm text-gray-500 ml-4 flex-shrink-0 font-medium">
+                      <h3 className="font-bold text-gray-800 print:text-sm">{exp.title}</h3>
+                      <span className="text-sm text-gray-500 ml-4 flex-shrink-0 font-medium print:text-xs no-break">
                         {exp.period}
                       </span>
                     </div>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-600 text-sm print:text-xs">
                       {exp.organization}
                       {exp.location && ` - ${exp.location}`}
                     </p>
@@ -136,25 +136,25 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
             </div>
 
             {/* Education */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 mb-4">
-                <div className={`w-8 h-8 ${theme.primary} rounded-full flex items-center justify-center`}>
-                  <GraduationCap className="w-4 h-4 text-white" />
+            <div className="space-y-4 print:space-y-3 avoid-break">
+              <div className="flex items-center gap-2 mb-4 print:mb-3">
+                <div className={`w-8 h-8 print:w-6 print:h-6 ${theme.primary} rounded-full flex items-center justify-center`}>
+                  <GraduationCap className="w-4 h-4 text-white print:w-3 print:h-3" />
                 </div>
-                <h2 className={`text-xl font-bold ${theme.accent}`}>
+                <h2 className={`text-xl font-bold print:text-lg ${theme.accent}`}>
                   {data.sections.education}
                 </h2>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4 print:space-y-3">
                 {data.education.map((edu, index) => (
-                  <div key={index} className="border-l-3 border-gray-200 pl-4 pb-3">
+                  <div key={index} className="border-l-3 border-gray-200 pl-4 pb-3 print:pl-3 print:pb-2 education-item">
                     <div className="flex justify-between items-start mb-1">
-                      <h3 className="font-bold text-gray-800">{edu.title}</h3>
-                      <span className="text-sm text-gray-500 ml-4 flex-shrink-0 font-medium">
+                      <h3 className="font-bold text-gray-800 print:text-sm">{edu.title}</h3>
+                      <span className="text-sm text-gray-500 ml-4 flex-shrink-0 font-medium print:text-xs no-break">
                         {edu.year}
                       </span>
                     </div>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-600 text-sm print:text-xs">
                       {edu.institution}
                       {edu.location && ` - ${edu.location}`}
                     </p>

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { themes, cvData } from '@/data/cvData';
 import { Language, ThemeType, LayoutType } from '@/types/cv';
@@ -17,7 +18,109 @@ const Index = () => {
   const [layout, setLayout] = useState<LayoutType>('traditional');
 
   const handlePrint = () => {
+    // إعداد خاص للطباعة
+    const originalTitle = document.title;
+    document.title = `CV_${cvData[language].name}_${layout}`;
+    
+    // إضافة أنماط CSS إضافية للطباعة
+    const printStyles = document.createElement('style');
+    printStyles.textContent = `
+      @media print {
+        @page {
+          margin: 0.5in;
+          size: A4;
+        }
+        
+        * {
+          -webkit-print-color-adjust: exact !important;
+          color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        
+        body {
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        
+        .print\\:p-0 {
+          padding: 0 !important;
+        }
+        
+        .print\\:max-w-none {
+          max-width: none !important;
+        }
+        
+        .print\\:shadow-none {
+          box-shadow: none !important;
+        }
+        
+        .print\\:border-none {
+          border: none !important;
+        }
+        
+        .print\\:hidden {
+          display: none !important;
+        }
+        
+        /* تحسين الألوان والخلفيات */
+        .bg-blue-600, .bg-blue-500 {
+          background-color: #2563eb !important;
+          color: white !important;
+        }
+        
+        .bg-green-600, .bg-green-500 {
+          background-color: #16a34a !important;
+          color: white !important;
+        }
+        
+        .bg-purple-600, .bg-purple-500 {
+          background-color: #9333ea !important;
+          color: white !important;
+        }
+        
+        .bg-orange-600, .bg-orange-500 {
+          background-color: #ea580c !important;
+          color: white !important;
+        }
+        
+        .bg-red-600, .bg-red-500 {
+          background-color: #dc2626 !important;
+          color: white !important;
+        }
+        
+        /* الحفاظ على التخطيط */
+        .grid {
+          display: grid !important;
+        }
+        
+        .lg\\:grid-cols-3 {
+          grid-template-columns: 1fr 2fr !important;
+        }
+        
+        .lg\\:grid-cols-4 {
+          grid-template-columns: 1fr 3fr !important;
+        }
+        
+        .lg\\:col-span-2 {
+          grid-column: span 2 !important;
+        }
+        
+        .lg\\:col-span-3 {
+          grid-column: span 3 !important;
+        }
+      }
+    `;
+    
+    document.head.appendChild(printStyles);
+    
+    // تنشيط الطباعة
     window.print();
+    
+    // إزالة الأنماط الإضافية بعد الطباعة
+    setTimeout(() => {
+      document.head.removeChild(printStyles);
+      document.title = originalTitle;
+    }, 1000);
   };
 
   const handleLanguageChange = () => {
@@ -76,47 +179,10 @@ const Index = () => {
 
       {/* CV Content */}
       <div className="max-w-4xl mx-auto p-6 print:p-0 print:max-w-none">
-        {renderLayout()}
+        <div className="avoid-break">
+          {renderLayout()}
+        </div>
       </div>
-
-      {/* Print Styles */}
-      <style>{`
-        @media print {
-          @page {
-            margin: 0.5in;
-            size: A4;
-          }
-          
-          body {
-            -webkit-print-color-adjust: exact;
-            color-adjust: exact;
-          }
-          
-          .print\\:hidden {
-            display: none !important;
-          }
-          
-          .print\\:p-0 {
-            padding: 0 !important;
-          }
-          
-          .print\\:p-6 {
-            padding: 1.5rem !important;
-          }
-          
-          .print\\:max-w-none {
-            max-width: none !important;
-          }
-          
-          .print\\:shadow-none {
-            box-shadow: none !important;
-          }
-          
-          .print\\:border-none {
-            border: none !important;
-          }
-        }
-      `}</style>
     </div>
   );
 };
