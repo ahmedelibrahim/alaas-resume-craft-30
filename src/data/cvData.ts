@@ -1,4 +1,3 @@
-
 import { CVData, Theme, ThemeType } from '@/types/cv';
 
 export const themes: Record<ThemeType, Theme> = {
@@ -62,6 +61,7 @@ export const cvData: Record<'ar' | 'en', CVData> = {
   ar: {
     name: 'علاء مصاص',
     title: 'مسؤول تعليم ومدرب تنمية بشرية معتمد',
+    summary: 'مدرب ومشرف تربوي بخبرة واسعة في التعليم والتدريب الإنساني، متخصص في تصميم وتنفيذ البرامج التعليمية، يتمتع بمهارات عالية في القيادة والتواصل والعمل ضمن بيئات متعددة الثقافات.',
     personalInfo: {
       birthDate: '25 أغسطس 1983',
       birthPlace: 'حلب / سوريا',
@@ -201,12 +201,14 @@ export const cvData: Record<'ar' | 'en', CVData> = {
       education: 'المؤهلات الدراسية',
       experience: 'الخبرات العملية',
       skills: 'المهارات',
-      languages: 'اللغات'
+      languages: 'اللغات',
+      summary: 'نبذة شخصية'
     }
   },
   en: {
     name: 'Alaa Massas',
     title: 'Education Officer & Certified Human Development Trainer',
+    summary: 'Experienced trainer and educational supervisor in humanitarian education, skilled in program design and implementation, with strong leadership, communication, and cross-cultural teamwork abilities.',
     personalInfo: {
       birthDate: 'August 25, 1983',
       birthPlace: 'Aleppo, Syria',
@@ -346,7 +348,8 @@ export const cvData: Record<'ar' | 'en', CVData> = {
       education: 'Education & Training',
       experience: 'Work Experience',
       skills: 'Skills',
-      languages: 'Languages'
+      languages: 'Languages',
+      summary: 'Professional Summary'
     }
   }
 };

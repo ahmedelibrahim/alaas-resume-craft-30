@@ -39,11 +39,13 @@ export interface CVSections {
   experience: string;
   skills: string;
   languages: string;
+  summary: string;
 }
 
 export interface CVData {
   name: string;
   title: string;
+  summary: string;
   personalInfo: CVPersonalInfo;
   education: Education[];
   experience: JobExperience[];

@@ -8,6 +8,7 @@ import EducationSection from '@/components/EducationSection';
 import SkillsSection from '@/components/SkillsSection';
 import LanguagesSection from '@/components/LanguagesSection';
 import PersonalInfoSection from '@/components/PersonalInfoSection';
+import SummarySection from '@/components/SummarySection';
 
 interface TraditionalLayoutProps {
   data: CVData;
@@ -22,6 +23,13 @@ const TraditionalLayout: React.FC<TraditionalLayoutProps> = ({ data, theme, lang
       <CardContent className="p-6 print:p-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 print:gap-4">
           <div className="lg:col-span-2 space-y-5 print:space-y-3">
+            <div className="avoid-break">
+              <SummarySection 
+                summary={data.summary}
+                title={data.sections.summary}
+                theme={theme}
+              />
+            </div>
             <div className="avoid-break section-break">
               <ExperienceSection 
                 experience={data.experience}

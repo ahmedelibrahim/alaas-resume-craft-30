@@ -7,6 +7,7 @@ import CVHeader from '@/components/CVHeader';
 import SkillsSection from '@/components/SkillsSection';
 import LanguagesSection from '@/components/LanguagesSection';
 import PersonalInfoSection from '@/components/PersonalInfoSection';
+import SummarySection from '@/components/SummarySection';
 
 interface TimelineLayoutProps {
   data: CVData;
@@ -21,6 +22,15 @@ const TimelineLayout: React.FC<TimelineLayoutProps> = ({ data, theme, language }
       <CardContent className="p-6 print:p-4">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           <div className="lg:col-span-3">
+            {/* Summary */}
+            <div className="mb-6">
+              <SummarySection 
+                summary={data.summary}
+                title={data.sections.summary}
+                theme={theme}
+              />
+            </div>
+
             {/* Experience Timeline */}
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-4">

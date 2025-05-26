@@ -8,6 +8,7 @@ import ExperienceSection from '@/components/ExperienceSection';
 import EducationSection from '@/components/EducationSection';
 import SkillsSection from '@/components/SkillsSection';
 import LanguagesSection from '@/components/LanguagesSection';
+import SummarySection from '@/components/SummarySection';
 
 interface ExecutiveLayoutProps {
   data: CVData;
@@ -67,6 +68,11 @@ const ExecutiveLayout: React.FC<ExecutiveLayoutProps> = ({ data, theme, language
         <div className="p-8 print:p-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
+              <SummarySection 
+                summary={data.summary}
+                title={data.sections.summary}
+                theme={theme}
+              />
               <ExperienceSection 
                 experience={data.experience}
                 title={data.sections.experience}

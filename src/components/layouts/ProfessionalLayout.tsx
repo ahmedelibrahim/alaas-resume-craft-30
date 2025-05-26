@@ -6,6 +6,7 @@ import { Mail, Phone, MapPin, Calendar, User, Briefcase, GraduationCap } from "l
 import { CVData, Theme, Language } from '@/types/cv';
 import SkillsSection from '@/components/SkillsSection';
 import LanguagesSection from '@/components/LanguagesSection';
+import SummarySection from '@/components/SummarySection';
 
 interface ProfessionalLayoutProps {
   data: CVData;
@@ -105,6 +106,15 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
               <p className="text-lg text-gray-600 font-medium print:text-base">
                 {data.title}
               </p>
+            </div>
+
+            {/* Summary */}
+            <div className="space-y-4 print:space-y-3 avoid-break">
+              <SummarySection 
+                summary={data.summary}
+                title={data.sections.summary}
+                theme={theme}
+              />
             </div>
 
             {/* Experience */}

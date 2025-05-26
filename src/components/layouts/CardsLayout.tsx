@@ -8,6 +8,7 @@ import EducationSection from '@/components/EducationSection';
 import SkillsSection from '@/components/SkillsSection';
 import LanguagesSection from '@/components/LanguagesSection';
 import PersonalInfoSection from '@/components/PersonalInfoSection';
+import SummarySection from '@/components/SummarySection';
 
 interface CardsLayoutProps {
   data: CVData;
@@ -24,6 +25,16 @@ const CardsLayout: React.FC<CardsLayoutProps> = ({ data, theme, language }) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
+          <Card className="shadow-md print:shadow-none">
+            <CardContent className="p-6">
+              <SummarySection 
+                summary={data.summary}
+                title={data.sections.summary}
+                theme={theme}
+              />
+            </CardContent>
+          </Card>
+
           <Card className="shadow-md print:shadow-none">
             <CardContent className="p-6">
               <ExperienceSection 

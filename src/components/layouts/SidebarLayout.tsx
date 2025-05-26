@@ -8,6 +8,7 @@ import ExperienceSection from '@/components/ExperienceSection';
 import EducationSection from '@/components/EducationSection';
 import SkillsSection from '@/components/SkillsSection';
 import LanguagesSection from '@/components/LanguagesSection';
+import SummarySection from '@/components/SummarySection';
 
 interface SidebarLayoutProps {
   data: CVData;
@@ -78,6 +79,13 @@ const SidebarLayout: React.FC<SidebarLayoutProps> = ({ data, theme, language }) 
 
           {/* Main Content */}
           <div className="lg:col-span-3 p-8 print:p-4 space-y-6 print:space-y-4">
+            <div className="avoid-break">
+              <SummarySection 
+                summary={data.summary}
+                title={data.sections.summary}
+                theme={theme}
+              />
+            </div>
             <div className="avoid-break section-break">
               <ExperienceSection 
                 experience={data.experience}
