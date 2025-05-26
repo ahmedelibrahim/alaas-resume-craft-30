@@ -16,19 +16,66 @@ import {
   Award, 
   Languages,
   Download,
-  Globe
+  Globe,
+  Palette
 } from "lucide-react";
 
 const Index = () => {
   const [language, setLanguage] = useState<'ar' | 'en'>('ar');
+  const [theme, setTheme] = useState<'modern' | 'classic' | 'creative' | 'minimal' | 'corporate'>('modern');
 
   const handlePrint = () => {
     window.print();
   };
 
+  const themes = {
+    modern: {
+      name: { ar: 'عصري', en: 'Modern' },
+      primary: 'bg-blue-600',
+      secondary: 'bg-blue-100',
+      accent: 'text-blue-600',
+      headerBg: 'bg-gradient-to-r from-blue-600 to-blue-800',
+      skillColor: 'bg-blue-500'
+    },
+    classic: {
+      name: { ar: 'كلاسيكي', en: 'Classic' },
+      primary: 'bg-gray-800',
+      secondary: 'bg-gray-100',
+      accent: 'text-gray-800',
+      headerBg: 'bg-gradient-to-r from-gray-700 to-gray-900',
+      skillColor: 'bg-gray-600'
+    },
+    creative: {
+      name: { ar: 'إبداعي', en: 'Creative' },
+      primary: 'bg-purple-600',
+      secondary: 'bg-purple-100',
+      accent: 'text-purple-600',
+      headerBg: 'bg-gradient-to-r from-purple-600 to-pink-600',
+      skillColor: 'bg-purple-500'
+    },
+    minimal: {
+      name: { ar: 'بسيط', en: 'Minimal' },
+      primary: 'bg-green-600',
+      secondary: 'bg-green-50',
+      accent: 'text-green-600',
+      headerBg: 'bg-gradient-to-r from-green-500 to-green-700',
+      skillColor: 'bg-green-500'
+    },
+    corporate: {
+      name: { ar: 'شركات', en: 'Corporate' },
+      primary: 'bg-indigo-600',
+      secondary: 'bg-indigo-50',
+      accent: 'text-indigo-600',
+      headerBg: 'bg-gradient-to-r from-indigo-600 to-indigo-800',
+      skillColor: 'bg-indigo-500'
+    }
+  };
+
+  const currentTheme = themes[theme];
+
   const cvData = {
     ar: {
-      name: "علاء مساس",
+      name: "علاء مصاص",
       title: "مختص في التعليم والتدريب",
       personalInfo: {
         birthDate: "25 أغسطس 1983",
@@ -145,83 +192,109 @@ const Index = () => {
   return (
     <div className={`min-h-screen bg-gray-50 ${isRTL ? 'rtl' : 'ltr'}`}>
       {/* Print controls */}
-      <div className="print:hidden flex justify-center gap-4 p-4 bg-white shadow-sm">
-        <Button
-          variant="outline"
-          onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
-          className="flex items-center gap-2"
-        >
-          <Globe className="w-4 h-4" />
-          {language === 'ar' ? 'English' : 'العربية'}
-        </Button>
-        <Button onClick={handlePrint} className="flex items-center gap-2">
-          <Download className="w-4 h-4" />
-          {language === 'ar' ? 'طباعة PDF' : 'Print PDF'}
-        </Button>
+      <div className="print:hidden flex flex-col gap-4 p-4 bg-white shadow-sm">
+        <div className="flex justify-center gap-4">
+          <Button
+            variant="outline"
+            onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
+            className="flex items-center gap-2"
+          >
+            <Globe className="w-4 h-4" />
+            {language === 'ar' ? 'English' : 'العربية'}
+          </Button>
+          <Button onClick={handlePrint} className="flex items-center gap-2">
+            <Download className="w-4 h-4" />
+            {language === 'ar' ? 'طباعة PDF' : 'Print PDF'}
+          </Button>
+        </div>
+        
+        {/* Theme selector */}
+        <div className="flex justify-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2 text-sm font-medium">
+            <Palette className="w-4 h-4" />
+            {language === 'ar' ? 'اختر القالب:' : 'Choose Theme:'}
+          </div>
+          {Object.entries(themes).map(([key, themeData]) => (
+            <Button
+              key={key}
+              variant={theme === key ? "default" : "outline"}
+              size="sm"
+              onClick={() => setTheme(key as any)}
+              className="text-xs"
+            >
+              {themeData.name[language]}
+            </Button>
+          ))}
+        </div>
       </div>
 
       {/* CV Content */}
       <div className="max-w-4xl mx-auto p-6 print:p-0 print:max-w-none">
-        <Card className="shadow-lg print:shadow-none print:border-none">
-          <CardContent className="p-8 print:p-6">
-            {/* Header */}
-            <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
-              <Avatar className="w-32 h-32 md:w-40 md:h-40">
-                <AvatarImage 
-                  src="/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png" 
-                  alt={currentData.name}
-                />
-                <AvatarFallback className="text-2xl font-bold bg-blue-100 text-blue-600">
-                  {currentData.name.split(' ').map(n => n[0]).join('')}
-                </AvatarFallback>
-              </Avatar>
+        <Card className="shadow-lg print:shadow-none print:border-none overflow-hidden">
+          {/* Header with gradient background */}
+          <div className={`${currentTheme.headerBg} text-white p-8 print:p-6`}>
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="relative">
+                <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-white shadow-lg">
+                  <AvatarImage 
+                    src="/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png" 
+                    alt={currentData.name}
+                    className="object-cover"
+                  />
+                  <AvatarFallback className="text-2xl font-bold bg-white text-gray-600">
+                    {currentData.name.split(' ').map(n => n[0]).join('')}
+                  </AvatarFallback>
+                </Avatar>
+              </div>
               
               <div className="text-center md:text-start flex-1">
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+                <h1 className="text-3xl md:text-4xl font-bold mb-2">
                   {currentData.name}
                 </h1>
-                <p className="text-lg text-blue-600 font-medium mb-4">
+                <p className="text-lg font-medium mb-4 opacity-90">
                   {currentData.title}
                 </p>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-blue-500" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                  <div className="flex items-center gap-2 justify-center md:justify-start">
+                    <Phone className="w-4 h-4" />
                     <span>{currentData.personalInfo.phone}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-blue-500" />
+                  <div className="flex items-center gap-2 justify-center md:justify-start">
+                    <Mail className="w-4 h-4" />
                     <span>{currentData.personalInfo.email}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-blue-500" />
+                  <div className="flex items-center gap-2 justify-center md:justify-start">
+                    <MapPin className="w-4 h-4" />
                     <span>{currentData.personalInfo.residence}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-blue-500" />
+                  <div className="flex items-center gap-2 justify-center md:justify-start">
+                    <Calendar className="w-4 h-4" />
                     <span>{currentData.personalInfo.birthDate}</span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <Separator className="my-6" />
-
+          <CardContent className="p-8 print:p-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Left Column */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Experience */}
                 <section>
                   <div className="flex items-center gap-2 mb-4">
-                    <Briefcase className="w-5 h-5 text-blue-600" />
-                    <h2 className="text-xl font-bold text-gray-800">
+                    <div className={`w-8 h-8 ${currentTheme.primary} rounded-full flex items-center justify-center`}>
+                      <Briefcase className="w-4 h-4 text-white" />
+                    </div>
+                    <h2 className={`text-xl font-bold ${currentTheme.accent}`}>
                       {currentData.sections.experience}
                     </h2>
                   </div>
                   <div className="space-y-3">
                     {currentData.experience.map((exp, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div key={index} className="flex items-start gap-3 group">
+                        <div className={`w-3 h-3 ${currentTheme.skillColor} rounded-full mt-2 flex-shrink-0 group-hover:scale-110 transition-transform`}></div>
                         <p className="text-sm text-gray-700 leading-relaxed">{exp}</p>
                       </div>
                     ))}
@@ -231,15 +304,17 @@ const Index = () => {
                 {/* Education */}
                 <section>
                   <div className="flex items-center gap-2 mb-4">
-                    <GraduationCap className="w-5 h-5 text-blue-600" />
-                    <h2 className="text-xl font-bold text-gray-800">
+                    <div className={`w-8 h-8 ${currentTheme.primary} rounded-full flex items-center justify-center`}>
+                      <GraduationCap className="w-4 h-4 text-white" />
+                    </div>
+                    <h2 className={`text-xl font-bold ${currentTheme.accent}`}>
                       {currentData.sections.education}
                     </h2>
                   </div>
                   <div className="space-y-3">
                     {currentData.education.map((edu, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div key={index} className="flex items-start gap-3 group">
+                        <div className={`w-3 h-3 bg-green-500 rounded-full mt-2 flex-shrink-0 group-hover:scale-110 transition-transform`}></div>
                         <p className="text-sm text-gray-700 leading-relaxed">{edu}</p>
                       </div>
                     ))}
@@ -250,10 +325,12 @@ const Index = () => {
               {/* Right Column */}
               <div className="space-y-6">
                 {/* Personal Info */}
-                <section>
+                <section className={`${currentTheme.secondary} p-4 rounded-lg`}>
                   <div className="flex items-center gap-2 mb-4">
-                    <Award className="w-5 h-5 text-blue-600" />
-                    <h2 className="text-lg font-bold text-gray-800">
+                    <div className={`w-8 h-8 ${currentTheme.primary} rounded-full flex items-center justify-center`}>
+                      <Award className="w-4 h-4 text-white" />
+                    </div>
+                    <h2 className={`text-lg font-bold ${currentTheme.accent}`}>
                       {currentData.sections.personalInfo}
                     </h2>
                   </div>
@@ -267,19 +344,26 @@ const Index = () => {
                 {/* Skills */}
                 <section>
                   <div className="flex items-center gap-2 mb-4">
-                    <Award className="w-5 h-5 text-blue-600" />
-                    <h2 className="text-lg font-bold text-gray-800">
+                    <div className={`w-8 h-8 ${currentTheme.primary} rounded-full flex items-center justify-center`}>
+                      <Award className="w-4 h-4 text-white" />
+                    </div>
+                    <h2 className={`text-lg font-bold ${currentTheme.accent}`}>
                       {currentData.sections.skills}
                     </h2>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {currentData.skills.map((skill, index) => (
                       <div key={index}>
-                        <div className="flex justify-between items-center mb-1">
+                        <div className="flex justify-between items-center mb-2">
                           <span className="text-sm font-medium text-gray-700">{skill.name}</span>
                           <span className="text-xs text-gray-500">{skill.level}%</span>
                         </div>
-                        <Progress value={skill.level} className="h-2" />
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className={`h-2 rounded-full ${currentTheme.skillColor} transition-all duration-700`}
+                            style={{ width: `${skill.level}%` }}
+                          ></div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -288,22 +372,24 @@ const Index = () => {
                 {/* Languages */}
                 <section>
                   <div className="flex items-center gap-2 mb-4">
-                    <Languages className="w-5 h-5 text-blue-600" />
-                    <h2 className="text-lg font-bold text-gray-800">
+                    <div className={`w-8 h-8 ${currentTheme.primary} rounded-full flex items-center justify-center`}>
+                      <Languages className="w-4 h-4 text-white" />
+                    </div>
+                    <h2 className={`text-lg font-bold ${currentTheme.accent}`}>
                       {currentData.sections.languages}
                     </h2>
                   </div>
                   <div className="space-y-3">
                     {currentData.languages.map((lang, index) => (
                       <div key={index}>
-                        <div className="flex justify-between items-center mb-1">
+                        <div className="flex justify-between items-center mb-2">
                           <span className="text-sm font-medium text-gray-700">{lang.name}</span>
                           <div className="flex gap-1">
                             {Array.from({ length: 5 }).map((_, i) => (
                               <div
                                 key={i}
-                                className={`w-2 h-2 rounded-full ${
-                                  i < (lang.level / 20) ? 'bg-blue-500' : 'bg-gray-300'
+                                className={`w-3 h-3 rounded-full transition-colors ${
+                                  i < (lang.level / 20) ? currentTheme.skillColor : 'bg-gray-300'
                                 }`}
                               />
                             ))}
@@ -320,7 +406,7 @@ const Index = () => {
       </div>
 
       {/* Print Styles */}
-      <style jsx>{`
+      <style>{`
         @media print {
           @page {
             margin: 0.5in;
