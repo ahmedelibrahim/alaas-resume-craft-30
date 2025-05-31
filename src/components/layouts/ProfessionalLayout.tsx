@@ -48,6 +48,18 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
               </div>
             </div>
 
+            {/* المعلومات الشخصية */}
+            <div className="space-y-3 print:space-y-2 avoid-break">
+              <h3 className="text-lg font-bold mb-3 print:text-base print:mb-2">
+                {data.sections.personalInfo}
+              </h3>
+              <div className="space-y-2 text-sm print:text-xs print:space-y-1">
+                <p><strong>{language === 'ar' ? 'مكان الولادة:' : 'Birth Place:'}</strong> {data.personalInfo.birthPlace}</p>
+                <p><strong>{language === 'ar' ? 'الجنسية:' : 'Nationality:'}</strong> {data.personalInfo.nationality}</p>
+                <p><strong>{language === 'ar' ? 'الحالة الاجتماعية:' : 'Marital Status:'}</strong> {data.personalInfo.maritalStatus}</p>
+              </div>
+            </div>
+
             {/* معلومات التواصل */}
             <div className="space-y-3 print:space-y-2 avoid-break">
               <h3 className="text-lg font-bold mb-3 print:text-base print:mb-2 flex items-center gap-2">
@@ -92,18 +104,6 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
                 theme={theme}
                 variant="sidebar"
               />
-            </div>
-
-            {/* المعلومات الشخصية */}
-            <div className="space-y-3 print:space-y-2 avoid-break">
-              <h3 className="text-lg font-bold mb-3 print:text-base print:mb-2">
-                {data.sections.personalInfo}
-              </h3>
-              <div className="space-y-2 text-sm print:text-xs print:space-y-1">
-                <p><strong>{language === 'ar' ? 'مكان الولادة:' : 'Birth Place:'}</strong> {data.personalInfo.birthPlace}</p>
-                <p><strong>{language === 'ar' ? 'الجنسية:' : 'Nationality:'}</strong> {data.personalInfo.nationality}</p>
-                <p><strong>{language === 'ar' ? 'الحالة الاجتماعية:' : 'Marital Status:'}</strong> {data.personalInfo.maritalStatus}</p>
-              </div>
             </div>
           </div>
 
