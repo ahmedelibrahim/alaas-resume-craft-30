@@ -105,7 +105,7 @@
 @media print {
   /* إعدادات أساسية للصفحة */
   @page {
-    margin: 0.5in;
+    margin: 0.3in;
     size: A4;
   }
 
@@ -123,8 +123,8 @@
 
   /* إعدادات النصوص */
   body {
-    font-size: 11pt;
-    line-height: 1.4;
+    font-size: 9pt;
+    line-height: 1.2;
     color: #000 !important;
   }
 
@@ -160,48 +160,152 @@
     grid-column: span 3 / span 3 !important;
   }
 
-  /* إعدادات المسافات */
+  /* إعدادات المسافات المحدّثة للتخطيط المهني */
   .space-y-3 > * + * {
-    margin-top: 12pt !important;
+    margin-top: 6pt !important;
   }
 
   .space-y-4 > * + * {
-    margin-top: 16pt !important;
+    margin-top: 8pt !important;
   }
 
   .space-y-5 > * + * {
-    margin-top: 20pt !important;
+    margin-top: 10pt !important;
   }
 
   .space-y-6 > * + * {
-    margin-top: 24pt !important;
+    margin-top: 12pt !important;
   }
 
   .gap-6 {
-    gap: 24pt !important;
+    gap: 12pt !important;
   }
 
   .gap-4 {
-    gap: 16pt !important;
+    gap: 8pt !important;
   }
 
-  /* إعدادات الخطوط والعناوين */
+  /* تقليل المسافات الداخلية للتخطيط المهني */
+  .print\:p-4 {
+    padding: 8pt !important;
+  }
+
+  .print\:p-6 {
+    padding: 10pt !important;
+  }
+
+  .print\:space-y-4 > * + * {
+    margin-top: 6pt !important;
+  }
+
+  .print\:space-y-3 > * + * {
+    margin-top: 4pt !important;
+  }
+
+  .print\:space-y-2 > * + * {
+    margin-top: 3pt !important;
+  }
+
+  .print\:space-y-1 > * + * {
+    margin-top: 2pt !important;
+  }
+
+  /* إعدادات الخطوط والعناوين المحدّثة */
   h1 {
-    font-size: 18pt !important;
+    font-size: 14pt !important;
     font-weight: bold !important;
-    margin-bottom: 8pt !important;
+    margin-bottom: 4pt !important;
   }
 
   h2 {
-    font-size: 14pt !important;
+    font-size: 11pt !important;
     font-weight: bold !important;
-    margin-bottom: 6pt !important;
+    margin-bottom: 3pt !important;
   }
 
   h3 {
-    font-size: 12pt !important;
+    font-size: 9pt !important;
     font-weight: bold !important;
+    margin-bottom: 2pt !important;
+  }
+
+  /* تحسين أحجام النصوص للتخطيط المهني */
+  .print\:text-xs {
+    font-size: 7pt !important;
+  }
+
+  .print\:text-sm {
+    font-size: 8pt !important;
+  }
+
+  .print\:text-base {
+    font-size: 9pt !important;
+  }
+
+  .print\:text-lg {
+    font-size: 10pt !important;
+  }
+
+  .print\:text-xl {
+    font-size: 11pt !important;
+  }
+
+  /* تحسين حجم الصورة الشخصية */
+  .print\:w-24 {
+    width: 60pt !important;
+  }
+
+  .print\:h-24 {
+    height: 60pt !important;
+  }
+
+  .print\:w-6 {
+    width: 12pt !important;
+  }
+
+  .print\:h-6 {
+    height: 12pt !important;
+  }
+
+  .print\:w-4 {
+    width: 8pt !important;
+  }
+
+  .print\:h-4 {
+    height: 8pt !important;
+  }
+
+  .print\:w-3 {
+    width: 6pt !important;
+  }
+
+  .print\:h-3 {
+    height: 6pt !important;
+  }
+
+  /* تحسين المسافات العمودية */
+  .print\:mb-4 {
+    margin-bottom: 6pt !important;
+  }
+
+  .print\:mb-3 {
     margin-bottom: 4pt !important;
+  }
+
+  .print\:mb-2 {
+    margin-bottom: 3pt !important;
+  }
+
+  .print\:mb-1 {
+    margin-bottom: 2pt !important;
+  }
+
+  .print\:pl-3 {
+    padding-left: 6pt !important;
+  }
+
+  .print\:pb-2 {
+    padding-bottom: 3pt !important;
   }
 
   /* إعدادات الصورة الشخصية */
@@ -336,7 +440,7 @@
 
   /* تحسين المسافات العمودية */
   .section {
-    margin-bottom: 16pt !important;
+    margin-bottom: 8pt !important;
   }
 
   /* إعدادات خاصة للخطوط العربية */
@@ -350,8 +454,8 @@
 
   /* تحسين عرض الأيقونات */
   svg {
-    width: 12pt !important;
-    height: 12pt !important;
+    width: 8pt !important;
+    height: 8pt !important;
   }
 
   /* إخفاء العناصر التفاعلية */
@@ -374,40 +478,73 @@
 
   /* تحسين عرض معلومات الاتصال */
   .contact-info {
-    font-size: 10pt !important;
+    font-size: 8pt !important;
   }
 
   /* ضمان وضوح النصوص الصغيرة */
   .text-xs {
-    font-size: 9pt !important;
+    font-size: 7pt !important;
   }
 
   .text-sm {
-    font-size: 10pt !important;
+    font-size: 8pt !important;
   }
 
   .text-base {
-    font-size: 11pt !important;
+    font-size: 9pt !important;
   }
 
   .text-lg {
-    font-size: 12pt !important;
+    font-size: 10pt !important;
   }
 
   .text-xl {
-    font-size: 14pt !important;
+    font-size: 11pt !important;
   }
 
   .text-2xl {
-    font-size: 16pt !important;
+    font-size: 12pt !important;
   }
 
   .text-3xl {
-    font-size: 18pt !important;
+    font-size: 13pt !important;
   }
 
   .text-4xl {
-    font-size: 20pt !important;
+    font-size: 14pt !important;
+  }
+
+  /* إعدادات خاصة للتخطيط المهني لضمان ظهور المحتوى في صفحة واحدة */
+  .print\:min-h-\[297mm\] {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* تقليل الحد الأدنى للارتفاع لضمان احتواء المحتوى */
+  .min-h-\[297mm\] {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* تحسين تخطيط الأعمدة للتخطيط المهني */
+  .professional-layout {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* تحسين عرض الأعمدة */
+  .professional-sidebar {
+    width: 30% !important;
+    min-width: 30% !important;
+    padding: 8pt !important;
+  }
+
+  .professional-content {
+    width: 70% !important;
+    min-width: 70% !important;
+    padding: 8pt !important;
   }
 }
 
@@ -438,5 +575,38 @@
   th, td {
     border: 1pt solid #e5e7eb !important;
     padding: 4pt !important;
+  }
+
+  /* إعدادات خاصة للتخطيط المهني */
+  .professional-layout .space-y-6 > * + * {
+    margin-top: 8pt !important;
+  }
+
+  .professional-layout .space-y-4 > * + * {
+    margin-top: 6pt !important;
+  }
+
+  .professional-layout .space-y-3 > * + * {
+    margin-top: 4pt !important;
+  }
+
+  /* تحسين عرض عناصر الخبرة والتعليم */
+  .professional-layout .experience-item,
+  .professional-layout .education-item {
+    margin-bottom: 4pt !important;
+    padding-bottom: 2pt !important;
+  }
+
+  /* تحسين المسافات الداخلية للشريط الجانبي */
+  .professional-layout .print\:space-y-4 > * + * {
+    margin-top: 4pt !important;
+  }
+
+  .professional-layout .print\:space-y-3 > * + * {
+    margin-top: 3pt !important;
+  }
+
+  .professional-layout .print\:space-y-2 > * + * {
+    margin-top: 2pt !important;
   }
 }
