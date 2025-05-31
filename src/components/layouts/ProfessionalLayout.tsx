@@ -30,7 +30,7 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
                 <AvatarImage 
                   src="/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png" 
                   alt={data.name}
-                  className="object-cover"
+                  className="object-contain w-full h-full"
                 />
                 <AvatarFallback className="text-2xl font-bold bg-white text-gray-600 print:text-lg">
                   {data.name.split(' ').map(n => n[0]).join('')}
