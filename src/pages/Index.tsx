@@ -1,7 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { themes, cvData } from '@/data/cvData';
-import { Language, ThemeType, LayoutType, CVData } from '@/types/cv';
+import { Language, ThemeType, LayoutType, CVData, User } from '@/types/cv';
+import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
+import { Save, User as UserIcon } from 'lucide-react';
 import CVControls from '@/components/CVControls';
 import ThemeSelector from '@/components/ThemeSelector';
 import LayoutSelector from '@/components/LayoutSelector';
@@ -21,6 +25,17 @@ const Index = () => {
     ar: { ...cvData.ar },
     en: { ...cvData.en }
   });
+  const [user, setUser] = useState<User | null>(null);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // التحقق من حالة تسجيل الدخول
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
 
   const handlePrint = () => {
     // إعداد خاص للطباعة
@@ -133,6 +148,38 @@ const Index = () => {
     }));
   };
 
+  const handleSaveCV = () => {
+    if (!user) {
+      // توجيه المستخدم لتسجيل الدخول
+      toast({
+        title: "يجب تسجيل الدخول",
+        description: "يجب تسجيل الدخول لحفظ سيرتك الذاتية",
+        variant: "destructive"
+      });
+      navigate('/auth');
+      return;
+    }
+
+    // محاكاة حفظ السيرة الذاتية
+    toast({
+      title: "تم الحفظ بنجاح",
+      description: "تم حفظ سيرتك الذاتية بنجاح"
+    });
+    
+    // توجيه المستخدم إلى لوحة التحكم
+    setTimeout(() => {
+      navigate('/dashboard');
+    }, 1500);
+  };
+
+  const handleAuthAction = () => {
+    if (user) {
+      navigate('/dashboard');
+    } else {
+      navigate('/auth');
+    }
+  };
+
   const currentTheme = themes[theme];
   const currentData = customData[language];
   const isRTL = language === 'ar';
@@ -163,11 +210,25 @@ const Index = () => {
   return (
     <div className={`min-h-screen bg-gray-50 ${isRTL ? 'rtl' : 'ltr'}`}>
       {/* Controls */}
-      <CVControls 
-        language={language}
-        onLanguageChange={handleLanguageChange}
-        onPrint={handlePrint}
-      />
+      <div className="flex justify-between items-center p-4 print:hidden">
+        <CVControls 
+          language={language}
+          onLanguageChange={handleLanguageChange}
+          onPrint={handlePrint}
+        />
+        
+        <div className="flex gap-2">
+          <Button onClick={handleSaveCV} className="flex items-center gap-2">
+            <Save className="w-4 h-4" />
+            حفظ السيرة الذاتية
+          </Button>
+          
+          <Button onClick={handleAuthAction} variant="outline" className="flex items-center gap-2">
+            <UserIcon className="w-4 h-4" />
+            {user ? 'لوحة التحكم' : 'تسجيل الدخول'}
+          </Button>
+        </div>
+      </div>
       
       {/* Edit Form */}
       <div className="max-w-4xl mx-auto p-4 print:hidden">

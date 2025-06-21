@@ -52,6 +52,7 @@ export interface CVData {
   skills: CVSkill[];
   languages: CVLanguage[];
   sections: CVSections;
+  profileImage?: string;
 }
 
 export interface Theme {
@@ -67,6 +68,20 @@ export interface Layout {
   name: { ar: string; en: string };
   id: string;
   description: { ar: string; en: string };
+}
+
+export interface User {
+  id: string;
+  email: string;
+  name?: string;
+}
+
+export interface SavedCV {
+  id: string;
+  title: string;
+  data: CVData;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type Language = 'ar' | 'en';
