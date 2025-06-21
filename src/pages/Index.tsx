@@ -1,10 +1,11 @@
 
 import React, { useState } from 'react';
 import { themes, cvData } from '@/data/cvData';
-import { Language, ThemeType, LayoutType } from '@/types/cv';
+import { Language, ThemeType, LayoutType, CVData } from '@/types/cv';
 import CVControls from '@/components/CVControls';
 import ThemeSelector from '@/components/ThemeSelector';
 import LayoutSelector from '@/components/LayoutSelector';
+import EditForm from '@/components/EditForm';
 import TraditionalLayout from '@/components/layouts/TraditionalLayout';
 import SidebarLayout from '@/components/layouts/SidebarLayout';
 import TimelineLayout from '@/components/layouts/TimelineLayout';
@@ -16,13 +17,16 @@ const Index = () => {
   const [language, setLanguage] = useState<Language>('ar');
   const [theme, setTheme] = useState<ThemeType>('modern');
   const [layout, setLayout] = useState<LayoutType>('traditional');
+  const [customData, setCustomData] = useState<Record<Language, CVData>>({
+    ar: { ...cvData.ar },
+    en: { ...cvData.en }
+  });
 
   const handlePrint = () => {
     // إعداد خاص للطباعة
     const originalTitle = document.title;
-    document.title = `CV_${cvData[language].name}_${layout}`;
+    document.title = `CV_${customData[language].name}_${layout}`;
     
-    // إضافة أنماط CSS إضافية للطباعة
     const printStyles = document.createElement('style');
     printStyles.textContent = `
       @media print {
@@ -62,7 +66,6 @@ const Index = () => {
           display: none !important;
         }
         
-        /* تحسين الألوان والخلفيات */
         .bg-blue-600, .bg-blue-500 {
           background-color: #2563eb !important;
           color: white !important;
@@ -88,7 +91,6 @@ const Index = () => {
           color: white !important;
         }
         
-        /* الحفاظ على التخطيط */
         .grid {
           display: grid !important;
         }
@@ -112,11 +114,8 @@ const Index = () => {
     `;
     
     document.head.appendChild(printStyles);
-    
-    // تنشيط الطباعة
     window.print();
     
-    // إزالة الأنماط الإضافية بعد الطباعة
     setTimeout(() => {
       document.head.removeChild(printStyles);
       document.title = originalTitle;
@@ -127,8 +126,15 @@ const Index = () => {
     setLanguage(language === 'ar' ? 'en' : 'ar');
   };
 
+  const handleDataUpdate = (updatedData: CVData) => {
+    setCustomData(prev => ({
+      ...prev,
+      [language]: updatedData
+    }));
+  };
+
   const currentTheme = themes[theme];
-  const currentData = cvData[language];
+  const currentData = customData[language];
   const isRTL = language === 'ar';
 
   const renderLayout = () => {
@@ -162,6 +168,17 @@ const Index = () => {
         onLanguageChange={handleLanguageChange}
         onPrint={handlePrint}
       />
+      
+      {/* Edit Form */}
+      <div className="max-w-4xl mx-auto p-4 print:hidden">
+        <div className="flex justify-center mb-4">
+          <EditForm 
+            data={currentData}
+            language={language}
+            onSave={handleDataUpdate}
+          />
+        </div>
+      </div>
       
       {/* Theme selector */}
       <ThemeSelector 
