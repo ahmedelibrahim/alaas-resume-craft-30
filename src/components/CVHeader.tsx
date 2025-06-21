@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Mail, Phone, MapPin, Calendar } from "lucide-react";
@@ -9,15 +10,17 @@ interface CVHeaderProps {
 }
 
 const CVHeader: React.FC<CVHeaderProps> = ({ data, theme }) => {
+  const profileImageSrc = data.profileImage || "/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png";
+  
   return (
     <div className={`${theme.headerBg} text-white p-8 print:p-6`}>
       <div className="flex flex-col md:flex-row items-center gap-6">
         <div className="relative flex-shrink-0">
           <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-white shadow-lg">
             <AvatarImage 
-              src="/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png" 
+              src={profileImageSrc} 
               alt={data.name}
-              className="object-contain w-full h-full"
+              className="object-cover w-full h-full"
             />
             <AvatarFallback className="text-2xl font-bold bg-white text-gray-600">
               {data.name.split(' ').map(n => n[0]).join('')}

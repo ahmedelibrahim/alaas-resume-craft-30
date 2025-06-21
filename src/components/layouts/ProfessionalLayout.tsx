@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -16,6 +15,7 @@ interface ProfessionalLayoutProps {
 
 const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, language }) => {
   const isRTL = language === 'ar';
+  const profileImageSrc = data.profileImage || "/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png";
   
   return (
     <Card className="shadow-lg print:shadow-none print:border-none overflow-hidden max-w-4xl mx-auto avoid-break">
@@ -28,9 +28,9 @@ const ProfessionalLayout: React.FC<ProfessionalLayoutProps> = ({ data, theme, la
             <div className="text-center avoid-break">
               <Avatar className="w-32 h-32 mx-auto border-4 border-white shadow-lg mb-4 print:w-24 print:h-24 print:mb-3">
                 <AvatarImage 
-                  src="/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png" 
+                  src={profileImageSrc} 
                   alt={data.name}
-                  className="object-contain w-full h-full"
+                  className="object-cover w-full h-full"
                 />
                 <AvatarFallback className="text-2xl font-bold bg-white text-gray-600 print:text-lg">
                   {data.name.split(' ').map(n => n[0]).join('')}

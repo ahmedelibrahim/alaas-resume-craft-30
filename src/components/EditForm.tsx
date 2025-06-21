@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +17,7 @@ interface EditFormProps {
 
 const EditForm: React.FC<EditFormProps> = ({ data, language, onSave }) => {
   const [editedData, setEditedData] = useState<CVData>({ ...data });
-  const [profileImage, setProfileImage] = useState<string>("/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png");
+  const [profileImage, setProfileImage] = useState<string>(data.profileImage || "/lovable-uploads/b896dd71-c2de-440e-b52a-f46e5760ab27.png");
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -27,6 +26,11 @@ const EditForm: React.FC<EditFormProps> = ({ data, language, onSave }) => {
       reader.onload = (e) => {
         const result = e.target?.result as string;
         setProfileImage(result);
+        // حفظ الصورة في بيانات السيرة الذاتية
+        setEditedData(prev => ({
+          ...prev,
+          profileImage: result
+        }));
       };
       reader.readAsDataURL(file);
     }
@@ -145,7 +149,12 @@ const EditForm: React.FC<EditFormProps> = ({ data, language, onSave }) => {
   };
 
   const handleSave = () => {
-    onSave(editedData);
+    // التأكد من حفظ الصورة مع البيانات
+    const dataToSave = {
+      ...editedData,
+      profileImage: profileImage
+    };
+    onSave(dataToSave);
   };
 
   return (
